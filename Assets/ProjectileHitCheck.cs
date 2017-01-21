@@ -63,12 +63,14 @@ public class ProjectileHitCheck : MonoBehaviour {
                     damage = 0.75f; // else if inside medium area, change to medium damage
                 }
                 // apply the selected damage
-                this.GetComponent<AudioSource>().Play();
+                
                 col.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
                 
                 Debug.Log(col.gameObject.name + " hit. Health: " + col.gameObject.GetComponent<ApplyHit>().hitPoints);
             }
         }
+        
+        this.GetComponent<AudioSource>().Play();
         Destroy(this.gameObject,3f);
     }
     void Explosion()
@@ -90,9 +92,11 @@ public class ProjectileHitCheck : MonoBehaviour {
                 {
                     damage = 0.75f; // else if inside medium area, change to medium damage
                 }
-                this.GetComponent<AudioSource>().PlayOneShot(blast);
+                
                 col.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
             }
         }
+        
+        this.GetComponent<AudioSource>().PlayOneShot(blast);
     }
 }
