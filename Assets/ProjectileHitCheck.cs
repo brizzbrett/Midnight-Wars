@@ -5,6 +5,8 @@ using UnityEngine;
 public class ProjectileHitCheck : MonoBehaviour {
 
     float damage;
+    public AudioClip blast;
+
     public float timeToLive = 3.0f;
     public bool isGrenade = false;
 
@@ -40,7 +42,7 @@ public class ProjectileHitCheck : MonoBehaviour {
     {
         yield return new WaitForSeconds(5.0f);
 
-        Destroy(this.gameObject);
+        
 
         var colls = Physics.OverlapSphere(transform.position, farAreaEffect);
 
@@ -61,11 +63,13 @@ public class ProjectileHitCheck : MonoBehaviour {
                     damage = 0.75f; // else if inside medium area, change to medium damage
                 }
                 // apply the selected damage
+                this.GetComponent<AudioSource>().Play();
                 col.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
                 
                 Debug.Log(col.gameObject.name + " hit. Health: " + col.gameObject.GetComponent<ApplyHit>().hitPoints);
             }
         }
+        Destroy(this.gameObject,3f);
     }
     void Explosion()
     {
@@ -86,7 +90,7 @@ public class ProjectileHitCheck : MonoBehaviour {
                 {
                     damage = 0.75f; // else if inside medium area, change to medium damage
                 }
-                // apply the selected damage
+                this.GetComponent<AudioSource>().PlayOneShot(blast);
                 col.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
             }
         }
