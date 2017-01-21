@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour {
+public class FireHitScan : MonoBehaviour {
 
     float damage;
     public int distance = 20;
@@ -26,7 +26,7 @@ public class Fire : MonoBehaviour {
     {
         Vector3 direction = transform.TransformDirection(Vector3.forward);
         RaycastHit hit;
-        Vector3 localOffset = transform.position + transform.up;
+        Vector3 localOffset = transform.position + transform.right;
 
         if (Physics.Raycast(localOffset, direction, out hit, distance))
         {

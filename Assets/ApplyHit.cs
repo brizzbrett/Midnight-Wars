@@ -14,7 +14,7 @@ public class ApplyHit : MonoBehaviour {
 		
 	}
 
-    float hitPoints = 1.0f;
+    public float hitPoints = 1.0f;
  
     void ApplyDamage(float damage)
     {
@@ -22,7 +22,7 @@ public class ApplyHit : MonoBehaviour {
             return;
  
         hitPoints -= damage;
-
+      
         if(hitPoints <= 0.0)
         {
             Invoke("DelayedDetonate",0);
